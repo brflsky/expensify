@@ -4,17 +4,18 @@ exports[`Shold render single expense  1`] = `
 <div>
   <p>
     0
-     
+    .  
     <Link
       replace={false}
       to="/edit/0"
     >
       Gum
     </Link>
-      
-    199
-     
-    0
+     
+    $1.99
+     
+    1st-January-1970
+      
     <button
       onClick={[Function]}
     >

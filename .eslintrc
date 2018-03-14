@@ -18,6 +18,7 @@
         "jest": true
     },
     "rules": {
+        "arrow-parens": "off",
         "linebreak-style": [
             "error",
             "windows"
@@ -27,13 +28,14 @@
             "error",
             "never"
         ],
-        "no-unused-vars": [
-            "error",
-            {
-                "vars": "local",
-                "args": "none"
-            }
-        ],
+        "no-unused-vars": 0,
+        // "no-unused-vars": [
+        //     "error",
+        //     {
+        //         "vars": "none",
+        //         "args": "none"
+        //     }
+        // ],
         "react/jsx-filename-extension": 0,
         "indent": [
             "warn",

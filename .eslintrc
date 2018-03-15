@@ -29,6 +29,7 @@
             "never"
         ],
         "no-unused-vars": 0,
+        "no-multiple-empty-lines": "off",
         // "no-unused-vars": [
         //     "error",
         //     {

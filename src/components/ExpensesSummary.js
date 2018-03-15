@@ -4,7 +4,6 @@ import numeral from 'numeral';
 import select from '../selectors/expenses';
 import getExpensesTotal from '../selectors/expenses-total';
 
-
 export const ExpensesSummary = (props) => (
   <div>
     Viewing {props.expenses.length}. Total cost: {numeral(getExpensesTotal(props.expenses) / 100).format('$0,0.00')}

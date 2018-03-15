@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import createStore from './store/configureStore';
 import './styles/styles.scss';
+import './firebase/firebase';
 
 // import { addExpense } from './actions/expenses';
 // import { setTextFilter } from './actions/filters';

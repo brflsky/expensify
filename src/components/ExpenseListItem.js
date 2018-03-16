@@ -3,7 +3,7 @@ import moment from 'moment';
 import numeral from 'numeral';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeExpense } from '../actions/expenses';
+import { startRemoveExpense } from '../actions/expenses';
 
 export const ExpenseListItem = (props) => {
   // console.log('props', props);
@@ -14,7 +14,7 @@ export const ExpenseListItem = (props) => {
         <Link to={`/edit/${props.id}`} >{props.description}</Link>&nbsp;
         {numeral(props.amount / 100).format('$0,0.00')}&nbsp;
         {moment(props.createdAt).format('Do-MMMM-YYYY')}&nbsp;&nbsp;
-        <button onClick={() => { props.dispatch(removeExpense(props)); }}>X</button>
+        <button onClick={() => { props.dispatch(startRemoveExpense(props)); }}>X</button>
       </p>
     </div>
   );

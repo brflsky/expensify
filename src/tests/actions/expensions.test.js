@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { startAddExpense, addExpense, editExpense, removeExpense, setExpenses, startSetExpenses } from '../../actions/expenses';
+import { startAddExpense, addExpense, editExpense, removeExpense, setExpenses, startSetExpenses, startRemoveExpense, startEditExpense } from '../../actions/expenses';
 import db from '../../firebase/firebase';
 import { expenses } from '../fixtures';
 
@@ -93,3 +93,60 @@ test('should fetch expenses from firebase', (done) => {
     done();
   });
 });
+
+test('should remove expense from db', (done) => {
+  db.ref('expenses/1').remove().then(() => db.ref('expenses/1').once('value')
+    .then((snapshot) => {
+      expect(snapshot.val()).toEqual(null);
+      done();
+    }));
+});
+
+test('should remove expense from db dispatching actions', (done) => {
+  const store = createMockStore(expenses);
+  store.dispatch(startRemoveExpense(expenses[1])).then(() => db.ref(`expenses/${expenses[1].id}`).once('value')
+    .then((snapshot) => {
+      expect(snapshot.val()).toEqual(null);
+      done();
+    }));
+});
+
+test('should dispatch editExpense action and update DB', (done) => {
+  const store = createMockStore(expenses);
+  expenses[1].notes = 'new test notes';
+  store.dispatch(startEditExpense(expenses[1].id, expenses[1]))
+    .then(() => {
+      expect(store.getActions()[0]).toEqual({
+        type: 'EDIT_EXPENSE',
+        expense: expenses[1],
+        id: expenses[1].id
+      });
+    }).then(() => { // how this could work?
+      db.ref(`expenses/${expenses[1].id}`).once('value')
+        .then((snapshot) => {
+          expect(snapshot.val()).toEqual(expenses[1]);
+          done();
+        });
+    });
+});
+//  test('should dispatch editExpense action and update DB', (done) => {
+//  const store = createMockStore(expenses);
+//   expenses[1].notes = 'dupa nie robi rózńicy';
+//   store.dispatch(startEditExpense(expenses[1].id, expenses[1]))
+//     .then(() => {
+//       expect(store.getActions()[0]).toEqual({
+//         type: 'EDIT_EXPENSE',
+//         expense: expenses[1],
+//         id: expenses[1].id
+//       });
+//       return db.ref(`expenses/${expenses[1].id}`).once('value');
+//     }).then((snapshot) => {
+//       expect(snapshot.val()).toEqual(expenses[1]);
+//       done();
+//     });
+// });
+
+
+// test('should update expense in db', (done) => {
+//   const store = createMockStore(expenses);
+// });

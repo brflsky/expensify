@@ -72,7 +72,7 @@ test('should add expense to database and store', (done) => {
   }).then((snapshot) => {
     expect(snapshot.val()).toEqual(expenseData);
     done();
-  });
+  }).then(() => {console.log('TTTT');});
 });
 
 test('should genereate SET_EXSPENSES action', () => {

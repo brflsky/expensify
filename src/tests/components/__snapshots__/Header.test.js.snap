@@ -29,5 +29,15 @@ exports[`should render Header corectly 1`] = `
   >
     Help
   </NavLink>
+  <NavLink
+    activeClassName="is-active"
+    ariaCurrent="true"
+    to="/dashboard"
+  >
+    Dashboard
+  </NavLink>
+  <button>
+    Logout
+  </button>
 </div>
 `;

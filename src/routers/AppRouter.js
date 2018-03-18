@@ -18,11 +18,12 @@ const AppRouter = () => {
       <div>
         <Header />
         <Switch>
-          <Route path="/" component={LoginPage} exact />
+          <PrivateRoute path="/" component={LoginPage} exact notPrivate />
           <PrivateRoute path="/create" component={AddExpensePage} />
           <PrivateRoute path="/edit/:id" component={EditExpensePage} />
           <PrivateRoute path="/dashboard" component={ExpansifyDashboardPage} />
           <Route path="/help" component={HelpPage} />
+          {/** Same as above: <Route path="/help" component={(props) => <HelpPage {...props}/> } /> */}
           <Route component={NotFoundPage} />
         </Switch>
       </div>

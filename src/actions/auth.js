@@ -18,4 +18,4 @@ export const logout = (uid) => ({
 
 export const startLogout = () => () => firebase.auth().signOut();
 
-export default startLogin;
+//export default startLogin;

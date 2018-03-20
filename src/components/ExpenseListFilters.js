@@ -5,7 +5,8 @@ import { setTextFilter, sortByAmount, sortByDate, setSortAsc, setStartDate, setE
 
 export class ExpenseListFilters extends React.Component {
   state = {
-    calenderFocused: null
+    calenderFocused: null,
+    sortAsc: true
   };
 
 
@@ -26,6 +27,19 @@ export class ExpenseListFilters extends React.Component {
     }
   }
 
+  onToggleSort = (e) => {
+    const sortAsc = !this.state.sortAsc;
+    this.setState((state) => ({
+      ...state,
+      sortAsc
+    }));
+    if (sortAsc) {
+      this.props.setSortAsc(true);
+    } else {
+      this.props.setSortAsc(false);
+    }
+  }
+
   onSortAscDescChange = (e) => {
     if (e.target.value === 'true') {
       this.props.setSortAsc(true);
@@ -38,33 +52,51 @@ export class ExpenseListFilters extends React.Component {
     this.props.setTextFilter(e.target.value);
   }
 
-  render () {
+  render() {
     return (
-      <div>
-        <input type="text" value={this.props.filters.text} onChange={this.onTextChange} />
-        <select onChange={this.onSortChange}
-          value={this.props.filters.sortBy}
-        >
-          <option value="date">Date</option>
-          <option value="amount">Amount</option>
-        </select>
-        <select onChange={this.onSortAscDescChange}
-          value={this.props.filters.sortAsc ? 'true' : 'false'}>
-          <option value="true">Asc</option>
-          <option value="false">Desc</option>
-        </select>
-        <DateRangePicker
-          startDate={this.props.filters.startDate}
-          endDate={this.props.filters.endDate}
-          onDatesChange={this.onDateChange}
-          focusedInput={this.state.calenderFocused}
-          onFocusChange={this.onFocusChange}
-          showClearDates={true}
-          numberOfMonths={1}
-          isOutsideRange={() => false}
-        />
-      </div>
+      <div className="content-container">
+        <div className="input-group">
+          <div className="input-group__item">
+            <input className="text-input" placeholder="Search Expenses" type="text" value={this.props.filters.text} onChange={this.onTextChange} />
+          </div>
+          <div className="input-group__item">
+            <select
+              className="select"
+              onChange={this.onSortChange}
+              value={this.props.filters.sortBy}
+              placeholder="Add Expenses"
+            >
+              <option value="date">Date</option>
+              <option value="amount">Amount</option>
+            </select>
+          </div>
+          <div className="input-group__item">
+          <p id="sortAsc" onClick={this.onToggleSort} className="sortAsc">{this.state.sortAsc ? '\u21E7' : '\u21E9'}</p>
+           {/** {this.state.sortAsc ? <p  className="">(&#11014)</p> : <p  className="">(&#11015)</p>}
+             <select
+              className="select"
+              onChange={this.onSortAscDescChange}
+              value={this.props.filters.sortAsc ? 'true' : 'false'}
+            >
+              <option value="true">Asc</option>
+              <option value="false">Desc</option>
+            </select> */}
+          </div>
+          <div className="input-group__item">
+            <DateRangePicker
+              startDate={this.props.filters.startDate}
+              endDate={this.props.filters.endDate}
+              onDatesChange={this.onDateChange}
+              focusedInput={this.state.calenderFocused}
+              onFocusChange={this.onFocusChange}
+              showClearDates={true}
+              numberOfMonths={1}
+              isOutsideRange={() => false}
+            />
+          </div>
+        </div>
 
+      </div>
     );
   }
 }

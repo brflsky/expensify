@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
+import Header from '../components/Header';
 
 export const PrivateRoute = ({
   notPrivate,
@@ -12,13 +13,18 @@ export const PrivateRoute = ({
       {...rest}
       component={(props) => (
         isAuthenticated ? (
-          notPrivate ? (<Redirect to="/dashboard" />) : (<Component {...props} />)
+          notPrivate ? (<Redirect to="/dashboard" />) : (
+            <div>
+              <Header />
+              <Component {...props} />
+            </div>
+          )
         ) : (
             notPrivate ? (<Component {...props} />) : (<Redirect to="/" />)
           )
       )}
     />
-);
+  );
 
 
 

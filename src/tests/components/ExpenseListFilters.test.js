@@ -48,14 +48,14 @@ test('should handle text startDateFilter', () => {
   wrapper.find('withStyles(DateRangePicker)').prop('onDatesChange')({ startDate: moment(0), endDate: moment(1000) });
   expect(setEndDate).toHaveBeenLastCalledWith(moment(1000));
 });
-test('should handle text sortAsc to true', () => {
-  wrapper.find('select').at(1).simulate('change', { target: { value: 'false' } });
-  expect(setSortAsc).toHaveBeenLastCalledWith(false);
-});
-test('should handle text sortAsc to false', () => {
-  wrapper.find('select').at(1).simulate('change', { target: { value: 'false' } });
-  expect(setSortAsc).toHaveBeenLastCalledWith(false);
-});
+// test('should handle text sortAsc to true', () => {
+//   wrapper.find('select').at(1).simulate('change', { target: { value: 'false' } });
+//   expect(setSortAsc).toHaveBeenLastCalledWith(false);
+// });
+// test('should handle text sortAsc to false', () => {
+//   wrapper.find('select').at(1).simulate('change', { target: { value: 'false' } });
+//   expect(setSortAsc).toHaveBeenLastCalledWith(false);
+// });
 test('should handle text SordBy amount', () => {
   wrapper.find('select').at(0).simulate('change', { target: { value: 'amount' } });
   expect(sortByAmount).toHaveBeenCalled();
@@ -63,4 +63,9 @@ test('should handle text SordBy amount', () => {
 test('should handle text SordBy date', () => {
   wrapper.find('select').at(0).simulate('change', { target: { value: 'date' } });
   expect(sortByDate).toHaveBeenCalled();
+});
+
+test('sholud set setSortAsc ', () => {
+  wrapper.find('#sortAsc').simulate('click');
+  expect(setSortAsc).toHaveBeenCalled();
 });

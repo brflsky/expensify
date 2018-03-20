@@ -1,0 +1,23 @@
+.text-input {
+  border: 1px solid #cacccd;
+  font-size: $font-size-l;
+  font-weight: 300;
+  height: 50px;
+  padding: $s-size;
+}
+
+.select {
+  @extend .text-input;
+}
+
+.textarea {
+  @extend .text-input;
+  height: 10rem;
+}
+
+.sortAsc {
+  align-items: center;
+  cursor: pointer;
+  line-height: 1;
+  font-size: $font-size-l;
+}

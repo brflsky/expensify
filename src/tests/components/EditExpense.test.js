@@ -23,12 +23,8 @@ test('should submit edited form', () => {
   newExpense.description = 'dupa';
   wrapper.find('ExpenseForm').prop('onSubmit')(newExpense);
   expect(history.push).toHaveBeenLastCalledWith('/');
-  expect(startEditExpense).toHaveBeenLastCalledWith('1',newExpense);
+  expect(startEditExpense).toHaveBeenLastCalledWith('1', newExpense);
 });
 
-test('should delete expense', () => {
-  wrapper.find('button').simulate('click');
-  expect(history.push).toHaveBeenLastCalledWith('/');
-  expect(startRemoveExpense).toHaveBeenLastCalledWith(expenses[1]);
-});
+
 

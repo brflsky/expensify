@@ -73,3 +73,11 @@ test('should set focus date picker', () => {
   wrapper.find('withStyles(SingleDatePicker)').prop('onFocusChange')({ focused });
   expect(wrapper.state('calenderFocused')).toEqual(focused);
 });
+
+test('should delete expense', () => {
+  const onRemove = jest.fn();
+  const wrapper = shallow(<ExpenseForm expense={expenses[0]} onRemove={onRemove} />);
+  wrapper.find('button').at(1).simulate('click', { preventDefault: () => {} });
+  //expect(history.push).toHaveBeenLastCalledWith('/');
+  expect(onRemove).toHaveBeenCalled();
+});
